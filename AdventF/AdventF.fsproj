@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Compile Include="Shared\Shared.fs" />
+    <Compile Include="Day03\Day03.fs" />
+    <Content Include="Day03\Day03.txt" />
     <Content Include="Day02\Day02.txt" />
     <Compile Include="Day02\Day02.fs" />
     <Content Include="Day01\Day01.txt" />
