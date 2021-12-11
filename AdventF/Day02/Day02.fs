@@ -59,7 +59,9 @@
             | head :: tail -> DoMoves tail (moveFunc head acc) moveFunc
             | _ -> acc
 
+        let SolveWith = DoMoves parsedLines ZeroPos
+
         let GetScore pos = pos.X * pos.Y
 
-        let part1 = DoMoves parsedLines ZeroPos DoMoveP1 |> GetScore
-        let part2 = DoMoves parsedLines ZeroPos DoMoveP2 |> GetScore
+        let part1 = SolveWith DoMoveP1 |> GetScore
+        let part2 = SolveWith DoMoveP2 |> GetScore
