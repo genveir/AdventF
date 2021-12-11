@@ -23,7 +23,7 @@
             | direction :: amount :: [] -> { Direction = (parseDirection direction); Amount = int amount }
             | _ -> failwith "can't parse submarine"
     
-        let private parseLine line = assignLine (splitLine line)
+        let private parseLine = splitLine >> assignLine
     
         let rec private parseLines lines =
             match lines with
@@ -39,14 +39,14 @@
         
         let ZeroPos : Position = { X = 0; Y = 0; Aim = 0 }
 
-        let DoMoveP1 input initial = 
+        let MoveP1 input initial = 
             match input.Direction with
             | direction.forward -> { X = initial.X + input.Amount; Y = initial.Y ; Aim = 0 }
             | direction.up -> { X = initial.X; Y = initial.Y - input.Amount ; Aim = 0}
             | direction.down -> { X = initial.X; Y = initial.Y + input.Amount ; Aim = 0}
             | _ -> failwith "Unknown direction"
 
-        let DoMoveP2 input initial = 
+        let MoveP2 input initial = 
             match input.Direction with
             | direction.forward -> { X = initial.X + input.Amount ; Y = initial.Y + initial.Aim * input.Amount; Aim = initial.Aim }
             | direction.up -> { X = initial.X; Y = initial.Y; Aim = initial.Aim - input.Amount }
@@ -63,5 +63,5 @@
 
         let GetScore pos = pos.X * pos.Y
 
-        let part1 = SolveWith DoMoveP1 |> GetScore
-        let part2 = SolveWith DoMoveP2 |> GetScore
+        let part1 = SolveWith MoveP1 |> GetScore
+        let part2 = SolveWith MoveP2 |> GetScore
